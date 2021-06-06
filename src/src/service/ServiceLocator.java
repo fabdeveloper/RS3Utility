@@ -40,6 +40,11 @@ import src.inter.IServiceLocator;
 @Singleton
 public class ServiceLocator implements IServiceLocator, Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 10L;
+
 	@Resource
 	private SessionContext ctx;
 	
@@ -160,6 +165,10 @@ public class ServiceLocator implements IServiceLocator, Serializable{
 		}		
 		
 		return entityServices;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 

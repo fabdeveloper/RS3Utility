@@ -154,6 +154,18 @@ public abstract class AbstractDao<T> implements IDao<T> {
 		}
 		return result;
 	}
+	
+	@Auditor
+	@Override
+	public List<T> createNamedQueryListResultDateParam(String queryname, String paramname, java.util.Date paramvalue){
+		List<T> result = null;
+		try{
+			result = getEntityManager().createNamedQuery(queryname, entityClass).setParameter(paramname, paramvalue).getResultList();
+		}catch(Throwable t){
+			throw new DBException("AbstractDao createNamedQueryListResultIntParam() error - queryname = " + queryname + ", paramname = " + paramname + ", paramvalue = " + paramvalue, t);
+		}
+		return result;
+	}
 		
 
 }

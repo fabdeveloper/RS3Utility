@@ -1,15 +1,13 @@
 package src.impl;
 
-import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
 
-import javax.enterprise.context.RequestScoped;
-
+import javax.enterprise.context.Dependent;
 import src.inter.IEncripter;
 
-@RequestScoped
+@Dependent
 public class Encripter implements IEncripter {
 
 	@Override

@@ -1,10 +1,9 @@
 package src.factory;
 
-import javax.enterprise.context.RequestScoped;
-
+import javax.enterprise.context.Dependent;
 import src.entity.Grupo;
 
-@RequestScoped
+@Dependent
 public class GrupoFactory extends AbstractBeanFactory<Grupo>{
 
 }

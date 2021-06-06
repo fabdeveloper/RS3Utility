@@ -1,10 +1,9 @@
 package src.dao;
 
-import javax.enterprise.context.RequestScoped;
-
+import javax.enterprise.context.Dependent;
 import src.entity.CartItem;
 
-@RequestScoped
+@Dependent
 public class CartItemDao extends AbstractDao<CartItem> {
 
 	public CartItemDao() {

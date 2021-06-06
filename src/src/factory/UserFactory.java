@@ -1,11 +1,10 @@
 package src.factory;
 
-import javax.enterprise.context.RequestScoped;
-
+import javax.enterprise.context.Dependent;
 import src.entity.User;
 
 
-@RequestScoped
+@Dependent
 public class UserFactory extends AbstractBeanFactory<User>{
 
 }

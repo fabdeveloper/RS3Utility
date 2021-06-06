@@ -1,10 +1,9 @@
 package src.factory;
 
-import javax.enterprise.context.RequestScoped;
-
+import javax.enterprise.context.Dependent;
 import src.entity.CartItem;
 
-@RequestScoped
+@Dependent
 public class CartItemFactory extends AbstractBeanFactory<CartItem> {
 
 }

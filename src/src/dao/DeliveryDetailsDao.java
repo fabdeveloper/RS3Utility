@@ -1,10 +1,9 @@
 package src.dao;
 
-import javax.enterprise.context.RequestScoped;
-
+import javax.enterprise.context.Dependent;
 import src.entity.DeliveryDetails;
 
-@RequestScoped
+@Dependent
 public class DeliveryDetailsDao extends AbstractDao<DeliveryDetails> {
 	
 	

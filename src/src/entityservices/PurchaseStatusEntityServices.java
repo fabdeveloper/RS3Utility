@@ -1,10 +1,9 @@
 package src.entityservices;
 
-import javax.enterprise.context.RequestScoped;
-
+import javax.enterprise.context.Dependent;
 import src.entity.PurchaseStatus;
 
-@RequestScoped
+@Dependent
 public class PurchaseStatusEntityServices extends
 		AbstractEntityServices<PurchaseStatus> {
 

@@ -1,10 +1,9 @@
 package src.gestor;
 
-import javax.enterprise.context.RequestScoped;
-
+import javax.enterprise.context.Dependent;
 import src.entity.Product;
 
-@RequestScoped
+@Dependent
 public class ProductGestor extends AbstractGestor<Product> {
 
 }

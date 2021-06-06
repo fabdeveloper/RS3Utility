@@ -2,10 +2,10 @@ package src.dao;
 
 import java.util.List;
 
-import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.Dependent;
 import src.entity.Oferta;
 
-@RequestScoped
+@Dependent
 public class OfertaDao extends AbstractDao<Oferta>{
 
 	public OfertaDao() {

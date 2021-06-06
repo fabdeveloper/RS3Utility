@@ -3,7 +3,7 @@ package src.entity;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.Dependent;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,7 +15,7 @@ import javax.persistence.Table;
 
 import src.inter.IPrototype;
 
-@RequestScoped
+@Dependent
 @Entity
 @Table(name="CARTS")
 public class Cart implements Serializable, IPrototype<Cart>{

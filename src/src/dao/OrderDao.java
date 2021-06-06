@@ -1,10 +1,10 @@
 package src.dao;
 
-import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.Dependent;
 
 import src.entity.Order;
 
-@RequestScoped
+@Dependent
 public class OrderDao extends AbstractDao<Order> {
 	
 	public OrderDao() {

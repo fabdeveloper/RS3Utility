@@ -3,7 +3,7 @@ package src.entity;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.Dependent;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,7 +20,7 @@ import javax.validation.constraints.NotNull;
 
 import src.inter.IPrototype;
 
-@RequestScoped
+@Dependent
 @Entity
 @Table(name="ORDERS")
 @NamedQueries({

@@ -2,7 +2,7 @@ package src.entity;
 
 import java.io.Serializable;
 
-import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.Dependent;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -14,7 +14,7 @@ import javax.persistence.ManyToOne;
 
 import src.inter.IPrototype;
 
-@RequestScoped
+@Dependent
 @Entity
 public class Atributo implements Serializable, IPrototype<Atributo>{
 	

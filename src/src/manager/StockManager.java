@@ -1,6 +1,6 @@
 package src.manager;
 
-import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 
 import src.entity.Oferta;
@@ -8,7 +8,7 @@ import src.exception.ConsumeStockException;
 import src.exception.DBException;
 import src.inter.IServiceLocator;
 
-@RequestScoped
+@Dependent
 public class StockManager implements IStockManager {
 	
 	@Inject

@@ -6,10 +6,13 @@ import java.util.Date;
 import javax.enterprise.context.Dependent;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import src.inter.IPrototype;
 
@@ -26,25 +29,27 @@ public class PurchaseStatus implements Serializable, IPrototype<PurchaseStatus>{
 	@Column(name="ID")
 	private Integer id;
 	
+	
 	@Column(name="REMARKS")
 	private String remark;
 	
-//	@OneToOne
-//	private Order order;
+	@NotNull
+	@Enumerated(EnumType.STRING)
+	@Column(name="STATUS", nullable=false, length=30)
+	private PurchaseStatusType status;
+
 	
-	@Column(name="MODIFICATION_DATE")
+	@NotNull
+	@Column(name="MODIFICATION_DATE", nullable=false)
 	private Date lastModification;
 	
-//	@ManyToOne
-//	private PurchaseStatusType purchaseStatusType;
 	
 	public PurchaseStatus clone(){
 		PurchaseStatus nuevo = new PurchaseStatus();
 		nuevo.setId(this.getId());
 		nuevo.setLastModification(this.getLastModification());
-//		nuevo.setOrder(this.getOrder());
 		nuevo.setRemark(this.getRemark());
-		
+		nuevo.setStatus(this.getStatus());		
 		
 		return nuevo;		
 	}
@@ -65,13 +70,6 @@ public class PurchaseStatus implements Serializable, IPrototype<PurchaseStatus>{
 		this.remark = remark;
 	}
 
-//	public Order getOrder() {
-//		return order;
-//	}
-//
-//	public void setOrder(Order order) {
-//		this.order = order;
-//	}
 
 	public Date getLastModification() {
 		return lastModification;
@@ -83,6 +81,14 @@ public class PurchaseStatus implements Serializable, IPrototype<PurchaseStatus>{
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public PurchaseStatusType getStatus() {
+		return status;
+	}
+
+	public void setStatus(PurchaseStatusType status) {
+		this.status = status;
 	}
 	
 	

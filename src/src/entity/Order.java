@@ -10,6 +10,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -24,8 +26,8 @@ import src.inter.IPrototype;
 @Entity
 @Table(name="ORDERS")
 @NamedQueries({
-	@NamedQuery(name="loadPendingOrder", query = "SELECT o FROM Order o WHERE o.purchaseStatus.remark NOT IN('CONFIRMADO', 'CANCELLED', 'PRE-CONFIRMADO') AND o.client.nick LIKE :client_nick"),
-	@NamedQuery(name="allPreConfirmedOrdersUntil", query = "SELECT o FROM Order o WHERE o.purchaseStatus.remark LIKE 'PRE-CONFIRMADO' AND o.purchaseStatus.lastModification <= :limit_date")
+	@NamedQuery(name="loadPendingOrder", query = "SELECT o FROM Order o WHERE o.purchaseStatus.status NOT IN('CONFIRMADO', 'CANCELADO', 'PRE-CONFIRMADO') AND o.client.nick LIKE :client_nick"),
+	@NamedQuery(name="allPreConfirmedOrdersUntil", query = "SELECT o FROM Order o WHERE o.purchaseStatus.status LIKE 'PRE-CONFIRMADO' AND o.purchaseStatus.lastModification <= :limit_date")
 })
 public class Order implements Serializable, IPrototype<Order>{
 	
@@ -37,32 +39,41 @@ public class Order implements Serializable, IPrototype<Order>{
 	private Integer id;
 	
 	@NotNull
+	@JoinColumn(name="CLIENT_ID", nullable=false)
 	@ManyToOne(optional=false)
 	private User client;
 	
 	@NotNull
+	@JoinColumn(name="CART_ID", nullable=false)
 	@OneToOne(optional=false, cascade={CascadeType.ALL})
 	private Cart cart;
 	
-	@Column(name="CONFIRMATION_DATE")
-	private Date confirmationDate;
-	
-	@NotNull
-	@Column(name="LAST_MODIFICATION_DATE")
-	private Date lastModificationDate;
-	
-	@NotNull
-	@Column(name="CREATION_DATE")
-	private Date creationDate;
 	
 	//  TODO : REEMPLAZAR POR UN STRING ************************************
 	@NotNull
+	@JoinColumn(name="PURCHASESTATUS_ID", nullable=false)
 	@OneToOne(cascade=CascadeType.ALL)
 	private PurchaseStatus purchaseStatus;
 	
 	@NotNull
+	@JoinColumn(name="DELIVERYDETAILS_ID", nullable=false)
 	@OneToOne(cascade=CascadeType.ALL)
 	private DeliveryDetails deliveryDetails;
+	
+	
+	@NotNull
+	@Column(name="LAST_MODIFICATION_DATE", nullable=false)
+	private Date lastModificationDate;
+	
+	@NotNull
+	@Column(name="CREATION_DATE", nullable=false)
+	private Date creationDate;	
+	
+	
+	@Column(name="CONFIRMATION_DATE")
+	private Date confirmationDate;
+
+
 	
 	
 	public Order clone(){

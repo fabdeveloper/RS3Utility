@@ -18,6 +18,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import src.inter.IPrototype;
 
@@ -39,11 +40,13 @@ public class Articulo implements Serializable, IPrototype<Articulo>{
 	@Column(name="ID")
 	private Integer id;
 	
+	@NotNull
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="FK_PRODUCT") //(name="PRODUCT_ID" )
-	private Product product; //FK
+	@JoinColumn(name="PRODUCT_ID", nullable=false) 
+	private Product product; 
 	
-	@Column(name="NAME")
+	@NotNull
+	@Column(name="NAME", unique=true, nullable=false)
 	private String name;
 	
 	@Column(name="descripcion")

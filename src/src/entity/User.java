@@ -16,6 +16,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import src.inter.IUser;
 import src.inter.IPrototype;
@@ -29,7 +30,7 @@ import src.inter.IPrototype;
 	@NamedQuery(name="byNick", query="SELECT u FROM User u WHERE u.nick LIKE :nick")
 
 })
-public class User implements Serializable, IUser, IPrototype<User>{
+public class User implements Serializable, IPrototype<User>{
 
 
 	private static final long serialVersionUID = 1L;
@@ -37,16 +38,28 @@ public class User implements Serializable, IUser, IPrototype<User>{
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="ID")	
 	private Integer id;
+	
+	@NotNull
 	@Column(name="NAME")	
 	private String name;
+	
+	@NotNull
 	@Column(name="NICK", unique=true)	
 	private String nick;
+	
+	@NotNull
 	@Column(name="EMAIL")	
 	private String email;
+	
+	@NotNull
 	@Column(name="PASS")	
 	private String password;
+	
+	@NotNull
 	@Column(name="ADDRESS")
 	private String address;
+	
+	@NotNull
 	@Column(name="TELEPHONE")
 	private String telephone;
 
@@ -83,22 +96,22 @@ public class User implements Serializable, IUser, IPrototype<User>{
 		return cadena;
 	}
 	
-	@Override
+
 	public Integer getId() {
 		return id;
 	}
 
-	@Override
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	@Override
+	
 	public String getName() {
 		return name;
 	}
 
-	@Override
+	
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -111,22 +124,22 @@ public class User implements Serializable, IUser, IPrototype<User>{
 		this.nick = nick;
 	}
 
-	@Override
+	
 	public String getEmail() {
 		return email;
 	}
 
-	@Override
+	
 	public void setEmail(String email) {
 		this.email = email;
 	}
 
-	@Override
+	
 	public String getPassword() {
 		return password;
 	}
 
-	@Override
+	
 	public void setPassword(String password) {
 		this.password = password;
 	}
@@ -147,12 +160,10 @@ public class User implements Serializable, IUser, IPrototype<User>{
 		this.telephone = telephone;
 	}
 
-	@Override
 	public List<Grupo> getListaGrupos() {
 		return listaGrupos;
 	}
 
-	@Override
 	public void setListaGrupos(List<Grupo> listaGrupos) {
 		this.listaGrupos = listaGrupos;
 	}

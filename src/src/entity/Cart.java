@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import src.inter.IPrototype;
 
@@ -28,15 +29,11 @@ public class Cart implements Serializable, IPrototype<Cart>{
 	@Column(name="ID")
 	private Integer id;
 	
-//	@ManyToMany
-//	@JoinTable(name="CART_OFERTA",
-//	joinColumns=@JoinColumn(name="ID_CART", table="CARTS", referencedColumnName="ID"),
-//	inverseJoinColumns=@JoinColumn(name="ID_OFERTA", table="OFERTAS", referencedColumnName="ID"))
-//	private List<Oferta> listaOfertas;
 	
 	@OneToMany(mappedBy="cart", orphanRemoval = true, cascade={CascadeType.ALL})
 	private List<CartItem> listaItems;
 	
+	@NotNull
 	@Column(name="VALUE")
 	private Float value;
 	

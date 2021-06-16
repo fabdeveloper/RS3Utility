@@ -12,6 +12,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import src.inter.IPrototype;
 
@@ -23,7 +24,6 @@ import src.inter.IPrototype;
 	@NamedQuery(name="productByName", query="SELECT b FROM Product b WHERE b.name LIKE :product_name"),
 	@NamedQuery(name="productos por tipo", query="SELECT b FROM Product b WHERE b.tipo LIKE :tipo")}	
 	)
-//@MappedSuperclass
 public class Product implements Serializable, IPrototype<Product>{
 	
 	@Id
@@ -32,19 +32,18 @@ public class Product implements Serializable, IPrototype<Product>{
 	@OneToMany(mappedBy="product")
 	private Integer id;
 	
-	@Column(name="NAME", unique=true)
+	@NotNull
+	@Column(name="NAME", unique=true, nullable=false)
 	private String name;
 	
-	@Column(name="TIPO")
+	@NotNull
+	@Column(name="TIPO", nullable=false)
 	private String tipo;
 	
 	@Column(name="URL_IMAGE")
 	private String urlImage;
 
-//	@ManyToOne
-//	@JoinColumn(name="FK_STORE")
-//	private Store store;
-	
+
 	
 	/***************************************/
 	

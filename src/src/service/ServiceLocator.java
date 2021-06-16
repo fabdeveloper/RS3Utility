@@ -33,22 +33,17 @@ import src.entity.User;
 import src.entityservices.IEntityServices;
 import src.inter.IEncripter;
 import src.inter.IServiceLocator;
-//import src.shopping.inter.ISessionManager;
-//import src.shopping.inter.IShoppingFacade;
-//import src.shopping.inter.IViewStateMachine;
+
 
 @Singleton
 public class ServiceLocator implements IServiceLocator, Serializable{
 	
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 10L;
 
 	@Resource
 	private SessionContext ctx;
 	
-//	private HttpServletRequest httpServletRequest;
 	
 	@PersistenceContext(unitName="RS3_PU")
 	private EntityManager em;

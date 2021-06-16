@@ -14,6 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import src.inter.IPrototype;
 
@@ -33,28 +34,33 @@ public class Oferta implements Serializable, IPrototype<Oferta>{
 	@Column(name="ID")
 	private Integer id;
 	
-	@Column(name="NAME")
+	@NotNull
+	@Column(name="NAME", unique=true, nullable=false)
 	private String name;
 	
+	@NotNull
 	@ManyToOne
-	@JoinColumn(name="ARTICULO_ID" )
-	private Articulo articulo; //FK
+	@JoinColumn(name="ARTICULO_ID", nullable=false)
+	private Articulo articulo; 
 	
-	@Column(name="PRECIO")
+	@NotNull
+	@Column(name="PRECIO", nullable=false)
 	private Float precio;
+	
+	@NotNull
+	@Column(name="STOCK", nullable=false)
+	private Integer stock;
+	
 	
 	@Column(name="DESCRIPCION")
 	private String descripcion;
 
 	@Column(name="URL_IMAGE")
-	private String urlImage;
-	
+	private String urlImage;	
 	
 	@Column(name="URL_IMAGE_BIG")
 	private String urlImagebig;
-	
-	@Column(name="STOCK")
-	private Integer stock;
+
 	
 	@Column(name="CREATION_DATE")
 	private Date creationDate;

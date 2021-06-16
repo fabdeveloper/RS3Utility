@@ -30,7 +30,7 @@ public class Encripter implements IEncripter {
 	}
 	
 	@Override
-	public String encriptStrintToSha256Base64(String encriptable) throws NoSuchAlgorithmException{
+	public String encriptStringToSha256Base64(String encriptable) throws NoSuchAlgorithmException{
 		final MessageDigest messageDigest = java.security.MessageDigest.getInstance("SHA-256");
 		messageDigest.reset();
 		final byte bin[] = messageDigest.digest(encriptable.getBytes());

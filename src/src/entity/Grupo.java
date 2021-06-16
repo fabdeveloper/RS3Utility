@@ -12,6 +12,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import src.inter.IPrototype;
 
@@ -28,16 +29,14 @@ public class Grupo implements Serializable, IPrototype<Grupo>{
 	@Column(name="ID")
 	private Integer id;
 	
-	@Column(name="NAME", unique=true)
+	@NotNull
+	@Column(name="NAME", unique=true, nullable=false)
 	private String name;
 	
 	@Column(name="DESCRIPTION")
 	private String description;
 	
-	
-//	@ManyToOne
-//	@JoinColumn(name="FK_STORE")
-//	private Store store;
+
 	
 	@Override
 	public Grupo clone(){

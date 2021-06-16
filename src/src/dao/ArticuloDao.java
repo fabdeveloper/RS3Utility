@@ -13,8 +13,8 @@ public class ArticuloDao extends AbstractDao<Articulo>{
 	}
 
 	
-	public List<Articulo> getListaArticulosPorProduct_Id(Integer product_id){
-		return getEntityManager().createNamedQuery("articulos por product_id", Articulo.class).setParameter("product_id", product_id).getResultList();
-	}
+//	public List<Articulo> getListaArticulosPorProduct_Id(Integer product_id){
+//		return getEntityManager().createNamedQuery("articulos por product_id", Articulo.class).setParameter("product_id", product_id).getResultList();
+//	}
 
 }

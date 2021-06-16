@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import src.inter.IPrototype;
 
@@ -24,14 +25,17 @@ public class CartItem implements Serializable, IPrototype<CartItem> {
 	@Column(name="ID")
 	private Integer id;
 	
-	@JoinColumn(name="OFERTA")
+	@NotNull
+	@JoinColumn(name="OFERTA_ID", nullable=false)
 	@ManyToOne
 	private Oferta oferta;
 	
-	@Column(name="COUNTER")
+	@NotNull
+	@Column(name="COUNTER", nullable=false)
 	private Integer counter;
 	
-	@JoinColumn(name="CART")
+	@NotNull
+	@JoinColumn(name="CART_ID", nullable=false)
 	@ManyToOne
 	private Cart cart;
 

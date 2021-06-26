@@ -35,7 +35,7 @@ public abstract class AbstractDao<T> implements IDao<T> {
 		try{
 			em = sl.getEntityManager();
 		}catch(Throwable t){
-			throw new DBException("EntityManager error", t);
+			throw new DBException("EntityManager error, msg= " + t.getMessage());
 		}
 		return em;
 	}
@@ -46,7 +46,7 @@ public abstract class AbstractDao<T> implements IDao<T> {
 		try{
 			getEntityManager().persist(entity);				
 		}catch(Throwable t){
-			throw new DBException("Entity NOT created : " + entity, t);
+			throw new DBException("Entity NOT created : " + entity + ", msg= " + t.getMessage());
 		}	
 	}
 	
@@ -57,7 +57,7 @@ public abstract class AbstractDao<T> implements IDao<T> {
 		try{
 			nuevo = getEntityManager().merge(entity);				
 		}catch(Throwable t){
-			throw new DBException("Edit error : " + entity, t);
+			throw new DBException("Edit error : " + entity + ", msg= " + t.getMessage());
 		}	
 		return nuevo;
 	}
@@ -68,7 +68,7 @@ public abstract class AbstractDao<T> implements IDao<T> {
 		try{
 			getEntityManager().remove(getEntityManager().merge(entity));	
 		}catch(Throwable t){
-			throw new DBException("Error removing : " + entity, t);
+			throw new DBException("Error removing : " + entity + ", msg= " + t.getMessage());
 		}		
 	}
 	
@@ -79,7 +79,7 @@ public abstract class AbstractDao<T> implements IDao<T> {
 		try{
 			entity = getEntityManager().find(entityClass, id);
 		}catch(Throwable t){
-			throw new DBException("Error finding entity : " + id, t);
+			throw new DBException("Error finding entity : " + id + ", msg= " + t.getMessage());
 		}
 		return entity;		
 	}
@@ -95,7 +95,7 @@ public abstract class AbstractDao<T> implements IDao<T> {
 	        javax.persistence.Query q = getEntityManager().createQuery(cq);
 	        response =  ((Long) q.getSingleResult()).intValue();   			
 		}catch(Throwable t){
-			throw new DBException("Error counting ", t);
+			throw new DBException("Error counting - msg= " + t.getMessage());
 		}
 		return response;        
 	}
@@ -114,7 +114,7 @@ public abstract class AbstractDao<T> implements IDao<T> {
 			TypedQuery<T> q = em.createQuery(cq);
 			result = q.getResultList();
 		}catch(Throwable t){
-			throw new DBException("AbstractDao getAll() error ", t);
+			throw new DBException("AbstractDao getAll() error - msg= " + t.getMessage());
 		}
 		return result;		
 	}
@@ -126,7 +126,7 @@ public abstract class AbstractDao<T> implements IDao<T> {
 		try{
 			entity = getEntityManager().createNamedQuery(queryname, entityClass).setParameter(paramname, paramvalue).getSingleResult();
 		}catch(Throwable t){
-			throw new DBException("AbstractDao createNamedQuery() error - queryname =  " + queryname + ", paramname = " + paramname + ", paramvalue = " + paramvalue, t);
+			throw new DBException("AbstractDao createNamedQuery() error - queryname =  " + queryname + ", paramname = " + paramname + ", paramvalue = " + paramvalue + ", msg= " + t.getMessage());
 		}
 		return entity;
 	}
@@ -138,7 +138,7 @@ public abstract class AbstractDao<T> implements IDao<T> {
 		try{
 			result = getEntityManager().createNamedQuery(queryname, entityClass).setParameter(paramname, paramvalue).getResultList();
 		}catch(Throwable t){
-			throw new DBException("AbstractDao createNamedQueryListResult() error - queryname = " + queryname + ", paramname = " + paramname + ", paramvalue = " + paramvalue, t);
+			throw new DBException("AbstractDao createNamedQueryListResult() error - queryname = " + queryname + ", paramname = " + paramname + ", paramvalue = " + paramvalue + ", msg= " + t.getMessage());
 		}
 		return result;
 	}
@@ -150,7 +150,7 @@ public abstract class AbstractDao<T> implements IDao<T> {
 		try{
 			result = getEntityManager().createNamedQuery(queryname, entityClass).setParameter(paramname, paramvalue).getResultList();
 		}catch(Throwable t){
-			throw new DBException("AbstractDao createNamedQueryListResultIntParam() error - queryname = " + queryname + ", paramname = " + paramname + ", paramvalue = " + paramvalue, t);
+			throw new DBException("AbstractDao createNamedQueryListResultIntParam() error - queryname = " + queryname + ", paramname = " + paramname + ", paramvalue = " + paramvalue + ", msg= " + t.getMessage());
 		}
 		return result;
 	}
@@ -162,7 +162,18 @@ public abstract class AbstractDao<T> implements IDao<T> {
 		try{
 			result = getEntityManager().createNamedQuery(queryname, entityClass).setParameter(paramname, paramvalue).getResultList();
 		}catch(Throwable t){
-			throw new DBException("AbstractDao createNamedQueryListResultIntParam() error - queryname = " + queryname + ", paramname = " + paramname + ", paramvalue = " + paramvalue, t);
+			throw new DBException("AbstractDao createNamedQueryListResultIntParam() error - queryname = " + queryname + ", paramname = " + paramname + ", paramvalue = " + paramvalue + ", msg= " + t.getMessage());
+		}
+		return result;
+	}
+	
+	@Override
+	public List<T> createNamedQueryLimited(String queryname, Integer limit){
+		List<T> result = null;
+		try{
+			result = getEntityManager().createNamedQuery(queryname, entityClass).setMaxResults(limit).getResultList();
+		}catch(Throwable t){
+			throw new DBException("AbstractDao createNamedQueryLimited() error - queryname = " + queryname + ", limit = " + limit + ", msg= " + t.getMessage());
 		}
 		return result;
 	}

@@ -26,8 +26,11 @@ import src.inter.IPrototype;
 @Entity
 @Table(name="ORDERS")
 @NamedQueries({
-	@NamedQuery(name="loadPendingOrder", query = "SELECT o FROM Order o WHERE o.purchaseStatus.status NOT IN('CONFIRMADO', 'CANCELADO', 'PRE-CONFIRMADO') AND o.client.nick LIKE :client_nick"),
-	@NamedQuery(name="allPreConfirmedOrdersUntil", query = "SELECT o FROM Order o WHERE o.purchaseStatus.status LIKE 'PRE-CONFIRMADO' AND o.purchaseStatus.lastModification <= :limit_date")
+//	@NamedQuery(name="loadPendingOrder", query = "SELECT o FROM Order o WHERE o.purchaseStatus.status NOT IN (src.entity.PurchaseStatusType.CONFIRMADO, src.entity.PurchaseStatusType.CANCELADO, src.entity.PurchaseStatusType.PRE_CONFIRMADO, src.entity.PurchaseStatusType.PAYMENT_ERROR) AND o.client.nick LIKE :client_nick"),
+	@NamedQuery(name="loadPendingOrder", query = "SELECT o FROM Order o WHERE o.purchaseStatus.status = src.entity.PurchaseStatusType.NO_CONFIRMADO AND o.client.nick LIKE :client_nick"),
+	@NamedQuery(name="ordersAll", query="SELECT b FROM Order b ORDER BY b.id DESC"),
+	@NamedQuery(name="ordersAllByClient", query="SELECT b FROM Order b WHERE b.client.nick LIKE :client_nick ORDER BY b.confirmationDate DESC"),
+	@NamedQuery(name="allPreConfirmedOrdersUntil", query = "SELECT o FROM Order o WHERE o.purchaseStatus.status = src.entity.PurchaseStatusType.PRE_CONFIRMADO AND o.purchaseStatus.lastModification < :limit_date")
 })
 public class Order implements Serializable, IPrototype<Order>{
 	
@@ -49,7 +52,6 @@ public class Order implements Serializable, IPrototype<Order>{
 	private Cart cart;
 	
 	
-	//  TODO : REEMPLAZAR POR UN STRING ************************************
 	@NotNull
 	@JoinColumn(name="PURCHASESTATUS_ID", nullable=false)
 	@OneToOne(cascade=CascadeType.ALL)

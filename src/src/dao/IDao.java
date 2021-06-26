@@ -15,6 +15,8 @@ public interface IDao<T> {
 	public List<T> createNamedQueryListResultIntParam(String queryname, String paramname, Integer paramvalue);
 	
 	public List<T> createNamedQueryListResultDateParam(String queryname, String paramname, java.util.Date paramvalue);
+	
+	public List<T> createNamedQueryLimited(String queryname, Integer limit);
 
 
 	public abstract void create(T entity);

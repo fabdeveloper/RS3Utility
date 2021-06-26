@@ -1,5 +1,7 @@
 package src.manager;
 
+import java.io.Serializable;
+
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 
@@ -9,12 +11,29 @@ import src.exception.DBException;
 import src.inter.IServiceLocator;
 
 @Dependent
-public class StockManager implements IStockManager {
+public class StockManager implements IStockManager, Serializable {
 	
+
+	private static final long serialVersionUID = 1L;
+
 	@Inject
 	private IServiceLocator serviceLocator;
 
 	private Oferta oferta;
+	
+	private void publish(String msg) {
+		System.out.println(msg);
+	}
+
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+
+	public void setServiceLocator(IServiceLocator serviceLocator) {
+		this.serviceLocator = serviceLocator;
+	}
 
 
 	@Override
@@ -40,8 +59,10 @@ public class StockManager implements IStockManager {
 
 	@Override
 	public Boolean recuperarStock(Integer oferta_id, Integer unidades) {
+		String msg = "StockManager.recuperarStock() - ";
 		Boolean ok = true;
 		int nuevoStock = disponible(oferta_id) + unidades;
+		publish(msg + ", nuevoStock = " + nuevoStock);
 		try{
 			updateStock(oferta, nuevoStock);		
 
@@ -53,10 +74,12 @@ public class StockManager implements IStockManager {
 
 	@Override
 	public Integer disponible(Integer oferta_id) {
+		String msg = "StockManager.disponible() - ";
 		Integer result = 0;
 		load(oferta_id);
 		if(oferta != null)result = oferta.getStock();
 
+		publish(msg + ", disponible= " + result);
 		return result;
 	}
 
@@ -76,20 +99,27 @@ public class StockManager implements IStockManager {
 
 	@Override
 	public void load(Integer oferta_id) {
-		oferta = serviceLocator.getOfertaServices().read(oferta_id);		
+		oferta = getServiceLocator().getOfertaServices().read(oferta_id);		
 	}
 
 	@Override
 	public Oferta updateStock(Oferta oferta, Integer unidades) {
+		String msg = "StockManager.updateStock() - ";
 		Oferta ofertaActualizada = oferta.clone();
 		ofertaActualizada.setStock(unidades);		
-		oferta = serviceLocator.getOfertaServices().update(ofertaActualizada);
+		oferta = getServiceLocator().getOfertaServices().update(ofertaActualizada);
+		publish(msg + ", actualizado stock = " + oferta.getStock());
 		return oferta;
 	}
 
 	@Override
 	public Oferta getOferta() {
 		return oferta;
+	}
+
+	@Override
+	public void setOferta(Oferta oferta) {
+		this.oferta = oferta;
 	}
 
 }

@@ -34,7 +34,7 @@ public class Cart implements Serializable, IPrototype<Cart>{
 	private List<CartItem> listaItems;
 	
 	@NotNull
-	@Column(name="VALUE")
+	@Column(name="VALUE", nullable=false)
 	private Float value;
 	
 	

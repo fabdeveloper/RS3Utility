@@ -13,6 +13,7 @@ import src.entity.Product;
 import src.entity.PurchaseStatus;
 import src.entity.User;
 import src.entityservices.IEntityServices;
+import src.entity.Etiqueta;
 
 public interface IServiceLocator {
 	
@@ -41,6 +42,8 @@ public interface IServiceLocator {
 	public IEntityServices<PurchaseStatus> getPurchaseStatusServices();
 
 	public IEntityServices<DeliveryDetails> getDeliveryDetailsServices();
+	
+	public IEntityServices<Etiqueta> getEtiquetaServices();
 	
 	public IEntityServices<?> getEntityServices(String entityClassName);
 	

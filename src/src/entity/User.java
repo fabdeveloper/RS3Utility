@@ -40,27 +40,27 @@ public class User implements Serializable, IPrototype<User>{
 	private Integer id;
 	
 	@NotNull
-	@Column(name="NAME")	
+	@Column(name="NAME", nullable=false)	
 	private String name;
 	
 	@NotNull
-	@Column(name="NICK", unique=true)	
+	@Column(name="NICK", unique=true, nullable=false)	
 	private String nick;
 	
 	@NotNull
-	@Column(name="EMAIL")	
+	@Column(name="EMAIL", nullable=false)	
 	private String email;
 	
 	@NotNull
-	@Column(name="PASS")	
+	@Column(name="PASS", nullable=false)	
 	private String password;
 	
 	@NotNull
-	@Column(name="ADDRESS")
+	@Column(name="ADDRESS", nullable=false)
 	private String address;
 	
 	@NotNull
-	@Column(name="TELEPHONE")
+	@Column(name="TELEPHONE", nullable=false)
 	private String telephone;
 
 	@ManyToMany

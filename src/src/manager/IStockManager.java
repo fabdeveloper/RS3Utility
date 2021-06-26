@@ -20,5 +20,7 @@ public interface IStockManager {
 	public Oferta updateStock(Oferta oferta, Integer unidades);
 	
 	public Oferta getOferta();
+	
+	public void setOferta(Oferta oferta);
 
 }

@@ -22,10 +22,13 @@ import src.inter.IPrototype;
 @NamedQueries({
 	@NamedQuery(name="productById", query="SELECT b FROM Product b WHERE b.id = :product_id"),
 	@NamedQuery(name="productByName", query="SELECT b FROM Product b WHERE b.name LIKE :product_name"),
-	@NamedQuery(name="productos por tipo", query="SELECT b FROM Product b WHERE b.tipo LIKE :tipo")}	
+	@NamedQuery(name="productsByType", query="SELECT b FROM Product b WHERE b.type LIKE :type")}	
 	)
 public class Product implements Serializable, IPrototype<Product>{
 	
+
+	private static final long serialVersionUID = 120L;
+
 	@Id
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	@Column(name="ID")
@@ -37,8 +40,8 @@ public class Product implements Serializable, IPrototype<Product>{
 	private String name;
 	
 	@NotNull
-	@Column(name="TIPO", nullable=false)
-	private String tipo;
+	@Column(name="TYPE", nullable=false)
+	private String type;
 	
 	@Column(name="URL_IMAGE")
 	private String urlImage;
@@ -63,23 +66,14 @@ public class Product implements Serializable, IPrototype<Product>{
 		this.name = name;
 	}
 
-	public String getTipo() {
-		return tipo;
+	public String getType() {
+		return type;
 	}
 
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
+	public void setType(String type) {
+		this.type = type;
 	}
 	
-	
-	
-//	public Store getStore() {
-//		return store;
-//	}
-//
-//	public void setStore(Store store) {
-//		this.store = store;
-//	}
 	
 	public String getUrlImage() {
 		return urlImage;
@@ -87,6 +81,10 @@ public class Product implements Serializable, IPrototype<Product>{
 
 	public void setUrlImage(String urlImage) {
 		this.urlImage = urlImage;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 	/*******************************************/
@@ -97,8 +95,7 @@ public class Product implements Serializable, IPrototype<Product>{
 		Product nuevo = new Product();
 		nuevo.setId(this.getId());
 		nuevo.setName(this.getName());
-		nuevo.setTipo(this.getTipo());
-//		nuevo.setStore(this.getStore());
+		nuevo.setType(this.getType());
 		
 		return nuevo;
 		

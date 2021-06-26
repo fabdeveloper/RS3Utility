@@ -21,6 +21,7 @@ public interface IEntityServices<E> {
 	public List<E> createNamedQueryListResult(String queryname, String paramname, String paramvalue);
 	public List<E> createNamedQueryListResultIntParam(String queryname, String paramname, Integer paramvalue);
 	public List<E> createNamedQueryListResultDateParam(String queryname, String paramname, java.util.Date paramvalue);
+	public List<E> createNamedQueryLimited(String queryname, Integer limit);
 
 
 	

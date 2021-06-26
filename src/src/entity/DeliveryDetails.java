@@ -6,6 +6,8 @@ import java.util.Date;
 import javax.enterprise.context.Dependent;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -28,29 +30,27 @@ public class DeliveryDetails implements Serializable, IPrototype<DeliveryDetails
 	private Integer id;
 	
 	@NotNull
-	@Column(name="DELIVERY_ADDRESS")
+	@Column(name="DELIVERY_ADDRESS", nullable=false)
 	private String deliveryAddress;
-	
-//	@ManyToOne
-//	private DeliveryType deliveryType;
-	
+		
 	@Column(name="REMARKS")
 	private String remark;
 	
 	@NotNull
-	@Column(name="STATUS")
-	private String status;
+	@Enumerated(EnumType.STRING)
+	@Column(name="STATUS", nullable=false, length=30)
+	private DeliveryDetailsStatusType status;
 	
 	@NotNull
-	@Column(name="LAST_MODIFICATION_DATE")
+	@Column(name="LAST_MODIFICATION_DATE", nullable=false)
 	private Date lastModificationDate;
 	
-//	@ManyToOne
-	@Column(name="DELIVERY_TYPE")
-	private String deliveryType;
+
+	@NotNull
+	@Enumerated(EnumType.STRING)
+	@Column(name="DELIVERY_TYPE", nullable=false, length=30)
+	private DeliveryType deliveryType;
 	
-//	@OneToOne
-//	private Order order;
 	
 	public DeliveryDetails clone(){
 		DeliveryDetails nuevo = new DeliveryDetails();
@@ -89,11 +89,11 @@ public class DeliveryDetails implements Serializable, IPrototype<DeliveryDetails
 		this.remark = remark;
 	}	
 
-	public String getStatus() {
+	public DeliveryDetailsStatusType getStatus() {
 		return status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(DeliveryDetailsStatusType status) {
 		this.status = status;
 	}
 
@@ -105,11 +105,11 @@ public class DeliveryDetails implements Serializable, IPrototype<DeliveryDetails
 		this.lastModificationDate = lastModificationDate;
 	}
 
-	public String getDeliveryType() {
+	public DeliveryType getDeliveryType() {
 		return deliveryType;
 	}
 
-	public void setDeliveryType(String deliveryType) {
+	public void setDeliveryType(DeliveryType deliveryType) {
 		this.deliveryType = deliveryType;
 	}
 

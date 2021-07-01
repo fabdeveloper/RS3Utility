@@ -30,6 +30,7 @@ import src.inter.IPrototype;
 	@NamedQuery(name="loadPendingOrder", query = "SELECT o FROM Order o WHERE o.purchaseStatus.status = src.entity.PurchaseStatusType.NO_CONFIRMADO AND o.client.nick LIKE :client_nick"),
 	@NamedQuery(name="ordersAll", query="SELECT b FROM Order b ORDER BY b.id DESC"),
 	@NamedQuery(name="ordersAllByClient", query="SELECT b FROM Order b WHERE b.client.nick LIKE :client_nick ORDER BY b.confirmationDate DESC"),
+	@NamedQuery(name="loadPendingDeliveryOrders", query = "SELECT o FROM Order o WHERE o.purchaseStatus.status = src.entity.PurchaseStatusType.CONFIRMADO AND o.deliveryDetails.status != src.entity.DeliveryDetailsStatusType.ENTREGADO"),
 	@NamedQuery(name="allPreConfirmedOrdersUntil", query = "SELECT o FROM Order o WHERE o.purchaseStatus.status = src.entity.PurchaseStatusType.PRE_CONFIRMADO AND o.purchaseStatus.lastModification < :limit_date")
 })
 public class Order implements Serializable, IPrototype<Order>{

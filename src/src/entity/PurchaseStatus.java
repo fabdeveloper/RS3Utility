@@ -53,6 +53,16 @@ public class PurchaseStatus implements Serializable, IPrototype<PurchaseStatus>{
 		
 		return nuevo;		
 	}
+	
+	@Override
+	public String toString(){
+//		super.toString();				
+		String cadena = "PurchaseStatus -   " + "id = " + getId() + 
+				", modificado = " + getLastModification() + 
+				", status = " + getStatus() + 
+				", remarks = " + getRemark() + "\n";			
+		return cadena;
+	}
 
 	public Integer getId() {
 		return id;

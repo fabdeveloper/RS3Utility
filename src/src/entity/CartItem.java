@@ -51,11 +51,12 @@ public class CartItem implements Serializable, IPrototype<CartItem> {
 	}
 	
 	public String toString(){
-		super.toString();
-		
+//		super.toString();		
 		String cadena = "";
-		cadena = "CartItem - id = " + getId() + ", ofertaid = " + getOferta().getId() + ", counter = " + getCounter() + ", cartId = " + getCart().getId() + "\n";
-		
+		cadena = "CartItem - id = " + getId() + 
+				", ofertaid = " + getOferta().getId() + 
+				", counter = " + getCounter() + 
+				", cartId = " + getCart().getId() + "\n";		
 		return cadena;
 	}
 	// Getters and Setters

@@ -79,6 +79,7 @@ public class User implements Serializable, IPrototype<User>{
 		user.setName(this.getName());
 		user.setNick(this.getNick());
 		user.setPassword(this.getPassword());
+		user.setAddress(this.getAddress());
 		user.setTelephone(this.getTelephone());
 		user.setListaGrupos(this.getListaGrupos());
 		
@@ -86,13 +87,14 @@ public class User implements Serializable, IPrototype<User>{
 	}
 	
 	public String toString(){
-		super.toString();
-		
+//		super.toString();		
 		String cadena = "";
-		cadena = "User -   " + "id = " + getId() + ", name = " + getName() + 
-				", nick = " + getNick() + ", address = " + getAddress() + ", email = " + getEmail() + "\n";
-		
-		
+		cadena = "User -   " + "id = " + getId() + 
+				", name = " + getName() + 
+				", nick = " + getNick() + 
+				", address = " + getAddress() + 
+				", email = " + getEmail() + 
+				", telephone = " + getTelephone() + "\n";		
 		return cadena;
 	}
 	

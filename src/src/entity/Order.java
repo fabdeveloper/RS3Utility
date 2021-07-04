@@ -93,17 +93,17 @@ public class Order implements Serializable, IPrototype<Order>{
 		return nuevo;		
 	}
 	
+	@Override
 	public String toString(){
-		super.toString();
-		
-		
-		String cadena = "Order -   " + "id = " + getId() + ", client = " + getClient() + 
-				", cart = " + getCart() + ", confirmation = " + getConfirmationDate() + 
-				", creation = " + getCreationDate() + ", deliverydetails = " + getDeliveryDetails() + 
-				", modification = " + getLastModificationDate() + ", purchasestatus = " + getPurchaseStatus();
-		
-		
-		
+//		super.toString();		
+		String cadena = "Order -   " + "id = " + getId() + 
+				", creation = " + getCreationDate() + 
+				", modification = " + getLastModificationDate() + 
+				", confirmation = " + getConfirmationDate() + "\n" +
+				", client = " + getClient().toString() + 
+				", cart = " + getCart().toString() + 
+				", deliverydetails = " + getDeliveryDetails().toString() + 
+				", purchasestatus = " + getPurchaseStatus().toString();		
 		return cadena;
 	}
 

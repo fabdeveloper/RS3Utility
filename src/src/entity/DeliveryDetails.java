@@ -64,6 +64,18 @@ public class DeliveryDetails implements Serializable, IPrototype<DeliveryDetails
 		
 		return nuevo;
 	}
+	
+	@Override
+	public String toString(){
+//		super.toString();				
+		String cadena = "DeliveryDetails -   " + "id = " + getId() + 
+				", delivery address = " + getDeliveryAddress() + 
+				", status = " + getStatus() + 
+				", remarks = " + getRemark() + 
+				", type = " + getDeliveryType() + 
+				", modification = " + getLastModificationDate() + "\n";			
+		return cadena;
+	}
 
 	public Integer getId() {
 		return id;

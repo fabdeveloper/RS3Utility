@@ -54,11 +54,11 @@ public abstract class AbstractDao<T> implements IDao<T> {
 	@Override
 	public T edit(T entity){
 		T nuevo = null;
-		try{
+//		try{
 			nuevo = getEntityManager().merge(entity);				
-		}catch(Throwable t){
-			throw new DBException("Edit error : " + entity + ", msg= " + t.getMessage() + "\n" + ", cause = " + t.getCause() + "\n" + ", cause = " + t.getStackTrace());
-		}	
+//		}catch(Throwable t){
+//			throw new DBException("Edit error : " + entity + ", msg= " + t.getMessage() + "\n" + ", cause = " + t.getCause() + "\n");
+//		}	
 		return nuevo;
 	}
 	

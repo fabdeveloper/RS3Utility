@@ -40,6 +40,7 @@ public class CartItem implements Serializable, IPrototype<CartItem> {
 	private Cart cart;
 
 	
+	@Override
 	public CartItem clone(){
 		CartItem nuevo = new CartItem();
 		nuevo.setId(this.getId());
@@ -50,6 +51,7 @@ public class CartItem implements Serializable, IPrototype<CartItem> {
 		return nuevo;
 	}
 	
+	@Override
 	public String toString(){
 //		super.toString();		
 		String cadena = "";

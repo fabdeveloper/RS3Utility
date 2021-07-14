@@ -107,7 +107,7 @@ public class StockManager implements IStockManager, Serializable {
 		String msg = "StockManager.updateStock() - ";
 		Oferta ofertaActualizada = oferta.clone();
 		ofertaActualizada.setStock(unidades);		
-		oferta = getServiceLocator().getOfertaServices().update(ofertaActualizada);
+		oferta = getServiceLocator().getOfertaServices().merge(ofertaActualizada);
 		publish(msg + ", actualizado stock = " + oferta.getStock());
 		return oferta;
 	}

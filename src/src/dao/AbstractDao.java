@@ -42,7 +42,7 @@ public abstract class AbstractDao<T> implements IDao<T> {
 	
 	@Interceptors(AuditInterceptor.class)	
 	@Override
-	public void create(T entity){
+	public void persist(T entity){
 		try{
 			getEntityManager().persist(entity);				
 		}catch(Throwable t){
@@ -52,7 +52,7 @@ public abstract class AbstractDao<T> implements IDao<T> {
 	
 	@Auditor
 	@Override
-	public T edit(T entity){
+	public T merge(T entity){
 		T nuevo = null;
 //		try{
 			nuevo = getEntityManager().merge(entity);				
@@ -129,6 +129,34 @@ public abstract class AbstractDao<T> implements IDao<T> {
 			throw new DBException("AbstractDao createNamedQuery() error - queryname =  " + queryname + ", paramname = " + paramname + ", paramvalue = " + paramvalue + ", msg= " + t.getMessage());
 		}
 		return entity;
+	}
+	
+	@Override
+	public T createNamedQuery2P(String queryname, String param1name, String param1value, String param2name, String param2value){
+		T entity = null;
+		try{
+			entity = getEntityManager().createNamedQuery(queryname, entityClass).setParameter(param1name, param1value).setParameter(param2name, param2value).getSingleResult();
+		}catch(Throwable t){
+			throw new DBException("AbstractDao createNamedQuery() error - queryname =  " + queryname + 
+					", param1name = " + param1name + ", param1value = " + param1value + 
+					", param2name = " + param2name + ", param2value = " + param2value +
+					", msg= " + t.getMessage());
+		}
+		return entity;
+	}
+	
+	@Override
+	public Integer createNamedQuery2PintResult(String queryname, String param1name, String param1value, String param2name, String param2value){
+		Integer result = null;
+		try{
+			result = getEntityManager().createNamedQuery(queryname, entityClass).setParameter(param1name, param1value).setParameter(param2name, param2value).executeUpdate();
+		}catch(Throwable t){
+			throw new DBException("AbstractDao createNamedQuery() error - queryname =  " + queryname + 
+					", param1name = " + param1name + ", param1value = " + param1value + 
+					", param2name = " + param2name + ", param2value = " + param2value +
+					", msg= " + t.getMessage());
+		}
+		return result;
 	}
 	
 	@Auditor

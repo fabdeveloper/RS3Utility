@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import src.dao.IDao;
 import src.gestor.IGestorE;
 import src.inter.IServiceLocator;
 
@@ -25,13 +26,18 @@ public abstract class AbstractEntityServices<E> implements IEntityServices<E> {
 	}
 	
 	@Override
+	public IDao<E> getDao(){
+		return getGestorE().getDao();
+	}
+	
+	@Override
 	public IServiceLocator getServiceLocator(){
 		return serviceLocator;
 	}
 
 	@Override
-	public void create(E e) {
-		gestor.getDao().create(e);
+	public void persist(E e) {
+		gestor.getDao().persist(e);
 	}
 
 	@Override
@@ -40,8 +46,8 @@ public abstract class AbstractEntityServices<E> implements IEntityServices<E> {
 	}
 
 	@Override
-	public E update(E e) {
-		return gestor.getDao().edit(e);
+	public E merge(E e) {
+		return gestor.getDao().merge(e);
 	}
 
 	@Override
@@ -58,6 +64,17 @@ public abstract class AbstractEntityServices<E> implements IEntityServices<E> {
 	public E createNamedQuery(String queryname, String paramname, String paramvalue){
 		return gestor.getDao().createNamedQuery(queryname, paramname, paramvalue);		
 	}
+	
+	@Override
+	public E createNamedQuery2P(String queryname, String param1name, String param1value, String param2name, String param2value){
+		return getDao().createNamedQuery2P(queryname, param1name, param1value, param2name, param2value);		
+	}
+	
+	@Override
+	public Integer createNamedQuery2PintResult(String queryname, String param1name, String param1value, String param2name, String param2value){
+		return getDao().createNamedQuery2PintResult(queryname, param1name, param1value, param2name, param2value);		
+	}	
+	
 
 	@Override
 	public List<E> createNamedQueryListResult(String queryname,	String paramname, String paramvalue) {

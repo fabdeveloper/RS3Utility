@@ -2,9 +2,13 @@ package src.entity;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 import javax.enterprise.context.Dependent;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,6 +19,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -28,6 +33,7 @@ import src.inter.IPrototype;
 	@NamedQuery(name="byName", query="SELECT u FROM User u WHERE u.name LIKE :nombre"),
 	@NamedQuery(name="byEmail", query="SELECT u FROM User u WHERE u.email LIKE :email"),
 	@NamedQuery(name="byNick", query="SELECT u FROM User u WHERE u.nick LIKE :nick")
+//	@NamedQuery(name="removeGrupo", query="DELETE FROM USER_GRUPO ug WHERE ug.NICK_USER LIKE :nick AND ug.NAME_GRUPO LIKE :grupo")
 
 })
 public class User implements Serializable, IPrototype<User>{
@@ -63,12 +69,18 @@ public class User implements Serializable, IPrototype<User>{
 	@NotNull
 	@Column(name="TELEPHONE", nullable=false)
 	private String telephone;
+	
+	@OneToMany(mappedBy="user", orphanRemoval = true, cascade={CascadeType.ALL})
+	private List<UserProfile> profiles;
 
-	@ManyToMany
-	@JoinTable(name="USER_GRUPO",
-			joinColumns=@JoinColumn(name="NICK_USER", table="USERS", referencedColumnName="NICK"),
-			inverseJoinColumns=@JoinColumn(name="NAME_GRUPO", table="GRUPOS", referencedColumnName="NAME"))
-	private List<Grupo> listaGrupos;
+	
+	
+
+//	@ManyToMany(cascade= {CascadeType.PERSIST, CascadeType.MERGE})
+//	@JoinTable(name="USER_GRUPO",
+//			joinColumns=@JoinColumn(name="NICK_USER", table="USERS", referencedColumnName="NICK"),
+//			inverseJoinColumns=@JoinColumn(name="NAME_GRUPO", table="GRUPOS", referencedColumnName="NAME"))
+//	private List<Grupo> listaGrupos;
 	
 	
 	
@@ -82,20 +94,26 @@ public class User implements Serializable, IPrototype<User>{
 		user.setPassword(this.getPassword());
 		user.setAddress(this.getAddress());
 		user.setTelephone(this.getTelephone());
-		user.setListaGrupos(this.getListaGrupos());
+		
+		user.setProfiles(this.getProfiles());
+//		user.setListaGrupos(this.getListaGrupos());
 		
 		return user;
 	}
 	
 	public String toString(){
-//		super.toString();		
 		String cadena = "";
 		cadena = "User -   " + "id = " + getId() + 
 				", name = " + getName() + 
 				", nick = " + getNick() + 
 				", address = " + getAddress() + 
 				", email = " + getEmail() + 
-				", telephone = " + getTelephone() + "\n";		
+				", telephone = " + getTelephone() + "\n";	
+		
+		for(UserProfile profile : getProfiles()) {
+			cadena += profile.toString();
+		}
+		cadena += "\n";
 		return cadena;
 	}
 	
@@ -162,29 +180,70 @@ public class User implements Serializable, IPrototype<User>{
 	public void setTelephone(String telephone) {
 		this.telephone = telephone;
 	}
-
-	public List<Grupo> getListaGrupos() {
-		return listaGrupos;
+	
+	public void addProfile(UserProfile profile) {
+		getProfiles().add(profile);
+	}
+	
+	public void removeProfile(UserProfile profile) {
+		getProfiles().remove(profile);
 	}
 
-	public void setListaGrupos(List<Grupo> listaGrupos) {
-		this.listaGrupos = listaGrupos;
-	}
 
 	public void addGrupo(Grupo grupo){
-		if(getListaGrupos() == null){
-			setListaGrupos(new ArrayList<Grupo>());
-		}
-		this.listaGrupos.add(grupo);
+		if(!grupoNuevo(grupo)) {return;}
+		UserProfile profile = new UserProfile();
+		
+		profile.setFechaCreacion(new Date());
+		profile.setGrupo(grupo);
+		profile.setUser(this);
+		
+		addProfile(profile);
+	}
+	
+	private boolean grupoNuevo(Grupo grupo) {
+		boolean result = true;
+		for(UserProfile profile : getProfiles()) {
+			if(profile.getGrupo().getId().compareTo(grupo.getId()) == 0) {
+				result = false;
+			}
+		}		
+		return result;
 	}
 	
 	public void removeGrupo(Grupo grupo){
-		this.listaGrupos.remove(grupo);
+		UserProfile selected = null;
+		for(UserProfile profile : getProfiles()) {
+			if(profile.getGrupo().getId().equals(grupo.getId())){
+				selected = profile;
+			}
+		}	
+		removeProfile(selected);
+	}
+
+	public List<UserProfile> getProfiles() {
+		if(profiles == null) {
+			profiles = new ArrayList<UserProfile>();
+		}
+		return profiles;
+	}
+
+	public void setProfiles(List<UserProfile> profiles) {
+		this.profiles = profiles;
 	}
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+	
+	
+//	public List<Grupo> getListaGrupos() {
+//	return listaGrupos;
+//}
+//
+//public void setListaGrupos(List<Grupo> listaGrupos) {
+//	this.listaGrupos = listaGrupos;
+//}
 	
 	
 }

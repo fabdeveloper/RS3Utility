@@ -43,11 +43,11 @@ public class ServiceLocator implements IServiceLocator, Serializable{
 	private static final long serialVersionUID = 10L;
 
 	@Resource
-	private SessionContext ctx;
+	private SessionContext sessionContext;
 	
 	
 	@PersistenceContext(unitName="RS3_PU")
-	private EntityManager em;
+	private EntityManager entityManager;
 	
 	@Inject
 	private IEncripter encripter;
@@ -75,17 +75,16 @@ public class ServiceLocator implements IServiceLocator, Serializable{
 	private IEntityServices<Etiqueta> etiquetaServices;
 	
 
-//	@Inject 
-//	private IShoppingFacade shoppingFacade;
+
 	
 	@Override 
 	public SessionContext getSessionContext(){
-		return ctx;
+		return sessionContext;
 	}
 	
 	@Override
 	public EntityManager getEntityManager(){
-		return em;
+		return entityManager;
 	}
 
 	@Override
@@ -147,7 +146,66 @@ public class ServiceLocator implements IServiceLocator, Serializable{
 	public IEntityServices<Etiqueta> getEtiquetaServices() {
 		return etiquetaServices;
 	}
+	
 
+
+
+	@Override
+	public void setSessionContext(SessionContext sessionContext) {
+		this.sessionContext = sessionContext;
+	}
+	@Override
+	public void setEntityManager(EntityManager entityManager) {
+		this.entityManager = entityManager;
+	}
+	@Override
+	public void setEncripter(IEncripter encripter) {
+		this.encripter = encripter;
+	}
+	@Override
+	public void setGrupoServices(IEntityServices<Grupo> grupoServices) {
+		this.grupoServices = grupoServices;
+	}
+	@Override
+	public void setUserServices(IEntityServices<User> userServices) {
+		this.userServices = userServices;
+	}
+	@Override
+	public void setProductServices(IEntityServices<Product> productServices) {
+		this.productServices = productServices;
+	}
+	@Override
+	public void setArticuloServices(IEntityServices<Articulo> articuloServices) {
+		this.articuloServices = articuloServices;
+	}
+	@Override
+	public void setOfertaServices(IEntityServices<Oferta> ofertaServices) {
+		this.ofertaServices = ofertaServices;
+	}
+	@Override
+	public void setCartServices(IEntityServices<Cart> cartServices) {
+		this.cartServices = cartServices;
+	}
+	@Override
+	public void setCartItemServices(IEntityServices<CartItem> cartItemServices) {
+		this.cartItemServices = cartItemServices;
+	}
+	@Override
+	public void setOrderServices(IEntityServices<Order> orderServices) {
+		this.orderServices = orderServices;
+	}
+	@Override
+	public void setPurchaseStatusServices(IEntityServices<PurchaseStatus> purchaseStatusServices) {
+		this.purchaseStatusServices = purchaseStatusServices;
+	}
+	@Override
+	public void setDeliveryDetailsServices(IEntityServices<DeliveryDetails> deliveryDetailsServices) {
+		this.deliveryDetailsServices = deliveryDetailsServices;
+	}
+	@Override
+	public void setEtiquetaServices(IEntityServices<Etiqueta> etiquetaServices) {
+		this.etiquetaServices = etiquetaServices;
+	}
 
 	@Override
 	public IEntityServices<?> getEntityServices(String entityClassName){
@@ -173,12 +231,6 @@ public class ServiceLocator implements IServiceLocator, Serializable{
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-
-
-//	@Override
-//	public IShoppingFacade getShoppingFacade() {
-//		return shoppingFacade;
-//	}
 
 
 }

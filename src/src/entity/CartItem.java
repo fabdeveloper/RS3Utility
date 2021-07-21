@@ -53,7 +53,6 @@ public class CartItem implements Serializable, IPrototype<CartItem> {
 	
 	@Override
 	public String toString(){
-//		super.toString();		
 		String cadena = "";
 		cadena = "CartItem - id = " + getId() + 
 				", ofertaid = " + getOferta().getId() + 

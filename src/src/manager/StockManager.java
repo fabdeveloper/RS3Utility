@@ -31,16 +31,18 @@ public class StockManager implements IStockManager, Serializable {
 	}
 
 
-	public void setServiceLocator(IServiceLocator serviceLocator) {
-		this.serviceLocator = serviceLocator;
-	}
+
 
 
 	@Override
 	public Boolean consumirStock(Integer oferta_id, Integer unidades) {
+		String msg = "StockManager.consumirStock() - ";
+
 		Boolean ok = true;
 		// check availability
 		int nuevoStock = disponible(oferta_id) - unidades;
+		publish(msg + ", nuevoStock = " + nuevoStock);
+
 		// consume stock
 		if(nuevoStock >= 0){
 			try{
@@ -86,6 +88,11 @@ public class StockManager implements IStockManager, Serializable {
 	@Override
 	public IServiceLocator getServiceLocator() {
 		return serviceLocator;
+	}
+	
+	@Override
+	public void setServiceLocator(IServiceLocator serviceLocator) {
+		this.serviceLocator = serviceLocator;
 	}
 
 	@Override

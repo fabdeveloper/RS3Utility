@@ -6,6 +6,7 @@ import src.inter.IServiceLocator;
 public interface IStockManager {
 	
 	public IServiceLocator getServiceLocator();
+	public void setServiceLocator(IServiceLocator serviceLocator);
 	
 	public Boolean consumirStock(Integer oferta_id, Integer unidades);
 	

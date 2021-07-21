@@ -100,10 +100,12 @@ public class Oferta implements Serializable, IPrototype<Oferta>{
 	@Override
 	public Oferta clone(){
 		Oferta oferta = new Oferta();
+		
 		oferta.setId(this.getId());
 		oferta.setName(this.getName());
 		oferta.setDescripcion(this.getDescripcion());
 		oferta.setPrecio(this.getPrecio());
+		oferta.setStock(this.getStock());
 		oferta.setArticulo(this.getArticulo());
 		oferta.setUrlImage(this.getUrlImage());
 		oferta.setUrlImagebig(this.getUrlImagebig());
@@ -112,6 +114,24 @@ public class Oferta implements Serializable, IPrototype<Oferta>{
 		oferta.setListaEtiquetas(this.getListaEtiquetas());
 
 		return oferta;
+	}
+	
+	
+	@Override
+	public String toString() {
+		String cadena = "Oferta - " +		
+		
+		"id= " + getId() +
+		", name= " + getName() +
+		", descripcion= " + getDescripcion() +
+		", precio= " + getPrecio() +
+		", articulo id= " + getArticulo().getId() +
+		", fecha creacion= " + getCreationDate() +
+		", fecha expira= " + getExpirationDate() +
+		", stock= " + getStock() +
+		"\n";		
+		
+		return cadena;
 	}
 	
 	

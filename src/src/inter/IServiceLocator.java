@@ -47,9 +47,24 @@ public interface IServiceLocator {
 	
 	public IEntityServices<?> getEntityServices(String entityClassName);
 	
-//	public IShoppingFacade getShoppingFacade();
 
 
+
+
+	public void setSessionContext(SessionContext sessionContext);
+	public void setEntityManager(EntityManager entityManager);
+	public void setEncripter(IEncripter encripter);
+	public void setGrupoServices(IEntityServices<Grupo> grupoServices);
+	public void setUserServices(IEntityServices<User> userServices);
+	public void setProductServices(IEntityServices<Product> productServices);
+	public void setArticuloServices(IEntityServices<Articulo> articuloServices);
+	public void setOfertaServices(IEntityServices<Oferta> ofertaServices);
+	public void setCartServices(IEntityServices<Cart> cartServices);
+	public void setCartItemServices(IEntityServices<CartItem> cartItemServices);
+	public void setOrderServices(IEntityServices<Order> orderServices);
+	public void setPurchaseStatusServices(IEntityServices<PurchaseStatus> purchaseStatusServices);
+	public void setDeliveryDetailsServices(IEntityServices<DeliveryDetails> deliveryDetailsServices);
+	public void setEtiquetaServices(IEntityServices<Etiqueta> etiquetaServices);
 	
 
 }

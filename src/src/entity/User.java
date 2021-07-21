@@ -101,6 +101,7 @@ public class User implements Serializable, IPrototype<User>{
 		return user;
 	}
 	
+	@Override
 	public String toString(){
 		String cadena = "";
 		cadena = "User -   " + "id = " + getId() + 

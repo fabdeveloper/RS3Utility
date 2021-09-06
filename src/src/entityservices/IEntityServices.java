@@ -8,17 +8,21 @@ import src.inter.IServiceLocator;
 
 public interface IEntityServices<E> {
 	
+	// utilities, tools and managers
 	public E getTransferObject();
 	public IServiceLocator getServiceLocator();
 	public IGestorE<E> getGestorE();
 	public IDao<E> getDao();
 	
+	// CRUD
 	public void persist(E e);
 	public E read(Integer id);
 	public E merge(E e);
 	public void delete(E e);
 	public List<E> readAll();
 	
+	
+	// queries
 	public E createNamedQuery(String queryname, String paramname, String paramvalue);
 	public E createNamedQuery2P(String queryname, String param1name, String param1value, String param2name, String param2value);
 	public Integer createNamedQuery2PintResult(String queryname, String param1name, String param1value, String param2name, String param2value);

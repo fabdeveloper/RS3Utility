@@ -6,6 +6,9 @@ import javax.inject.Inject;
 
 import src.entityservices.IEntityServices;
 
+
+// Utility
+
 public abstract class AbstractEntityManager<E> implements IEntityManager<E> {
 	
 	private List<E> all;

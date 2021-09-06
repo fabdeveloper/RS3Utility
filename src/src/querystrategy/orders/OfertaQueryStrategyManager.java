@@ -1,6 +1,3 @@
-/**
- * 
- */
 package src.querystrategy.orders;
 
 import java.io.Serializable;

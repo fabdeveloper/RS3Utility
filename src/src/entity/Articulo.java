@@ -81,6 +81,22 @@ public class Articulo implements Serializable, IPrototype<Articulo>{
 		return nuevo;
 	}
 	
+	@Override
+	public String toString() {
+		String sResult = super.toString() + "\n" +
+								"Articulo ->" + "\n" +
+				
+								"id= " + getId() + "\n" +
+								"name= " + getName() + "\n" +
+								"description= " + getDescripcion() + "\n" +
+								"price= " + getPrice() + "\n" +
+								"url image= " + getUrlImage() + "\n" +
+								"creation= " + getCreationDate() + "\n" +
+								"product= " + getProduct() + "\n";
+				
+		return sResult;
+	}
+	
 	
 	/****************************************/
 	

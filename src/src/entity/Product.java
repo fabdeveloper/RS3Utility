@@ -100,6 +100,20 @@ public class Product implements Serializable, IPrototype<Product>{
 		return nuevo;
 		
 	}
+	
+	
+	@Override
+	public String toString() {
+		String sResult = super.toString() + "\n";
+		
+		sResult += "Product -> " + "\n" +
+							"id= " + this.getId()  + "\n" +
+							"name= " + this.getName()  + "\n" +
+							"type= " + this.getType()  + "\n" +
+							"urlImage= " + this.getUrlImage()  + "\n";		
+		
+		return sResult;
+	}
 
 
 	

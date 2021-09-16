@@ -122,7 +122,9 @@ public abstract class AbstractDaoExcel<E> implements IDaoExcel<E> {
 			try {
 				em.persist(e);
 			}catch(Throwable t) {
-				String msg = "persistList() - ERROR - entity con problemas :   " + t.getMessage();
+				String msg = "persistList() - ERROR - message= " + t.getMessage() + "\n" +
+							"ExceptionClass= " + t.getClass().getName() + "\n" + 
+								"entity = " + e;
 				publish(msg);
 			}
 		}	
@@ -147,7 +149,8 @@ public abstract class AbstractDaoExcel<E> implements IDaoExcel<E> {
 	@Override
 	public List<E> getList() {
 		if(list == null) {
-			createList();
+			list = new ArrayList<E>();
+//			createList();
 		}
 		return list;
 	}

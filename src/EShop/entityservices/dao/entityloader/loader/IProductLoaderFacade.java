@@ -13,6 +13,13 @@ public interface IProductLoaderFacade {
 	public void setOfertaFileName(String ofertaFileName);
 	public String getOfertaFileName();
 	
+	public String getProductSheetName();
+	public void setProductSheetName(String sheetName);	
+	public String getArticuloSheetName();
+	public void setArticuloSheetName(String sheetName);	
+	public String getOfertaSheetName();
+	public void setOfertaSheetName(String sheetName);
+	
 	public void loadProductFromFile();
 	public void loadArticulosFromFile();
 	public void loadOfertasFromFile();

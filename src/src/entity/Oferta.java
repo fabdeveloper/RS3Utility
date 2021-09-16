@@ -119,17 +119,17 @@ public class Oferta implements Serializable, IPrototype<Oferta>{
 	
 	@Override
 	public String toString() {
-		String cadena = "Oferta - " +		
+		String cadena = super.toString() + "\n" + 
+								"Oferta -> " + "\n" + 		
 		
-		"id= " + getId() +
-		", name= " + getName() +
-		", descripcion= " + getDescripcion() +
-		", precio= " + getPrecio() +
-		", articulo id= " + getArticulo().getId() +
-		", fecha creacion= " + getCreationDate() +
-		", fecha expira= " + getExpirationDate() +
-		", stock= " + getStock() +
-		"\n";		
+		"id= " + getId() + "\n" + 
+		", name= " + getName() + "\n" + 
+		", descripcion= " + getDescripcion() + "\n" + 
+		", precio= " + getPrecio() + "\n" + 
+		", articulo id= " + getArticulo().getId() + "\n" + 
+		", fecha creacion= " + getCreationDate() + "\n" + 
+		", fecha expira= " + getExpirationDate() + "\n" + 
+		", stock= " + getStock() +	"\n";		
 		
 		return cadena;
 	}

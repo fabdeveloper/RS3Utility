@@ -1,6 +1,7 @@
 package EShop.entityservices.dao.xls.excel;
 
 import javax.enterprise.context.RequestScoped;
+import javax.enterprise.inject.Alternative;
 
 import org.apache.poi.ss.usermodel.Row;
 
@@ -8,7 +9,8 @@ import src.entity.Product;
 import src.exception.RS3Exception;
 import src.inter.IServiceLocator;
 
-@RequestScoped
+//@RequestScoped
+//@Alternative
 public class ProductDaoExcel implements IXlsToEntityConversor<Product> {
 
 

@@ -152,5 +152,36 @@ public class ProductLoaderFacade implements IProductLoaderFacade, Serializable  
 		return this.selectedOferta;
 	}
 
+	@Override
+	public String getProductSheetName() {
+		return getProductLoader().getSheetName();
+	}
+
+	@Override
+	public void setProductSheetName(String sheetName) {
+		getProductLoader().setSheetName(sheetName);
+	}
+
+	@Override
+	public String getArticuloSheetName() {
+		return getArticuloLoader().getSheetName();
+	}
+
+	@Override
+	public void setArticuloSheetName(String sheetName) {
+		getArticuloLoader().setSheetName(sheetName);		
+	}
+
+	@Override
+	public String getOfertaSheetName() {
+		return getOfertaLoader().getSheetName();
+	}
+
+	@Override
+	public void setOfertaSheetName(String sheetName) {
+		getOfertaLoader().setSheetName(sheetName);		
+	}
+
+
 
 }

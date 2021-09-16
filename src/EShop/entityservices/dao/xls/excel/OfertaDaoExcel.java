@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.enterprise.context.RequestScoped;
+import javax.enterprise.inject.Alternative;
 
 import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.ss.usermodel.Row;
@@ -13,7 +14,8 @@ import src.entity.Oferta;
 import src.exception.RS3Exception;
 import src.inter.IServiceLocator;
 
-@RequestScoped
+//@RequestScoped
+//@Alternative
 public class OfertaDaoExcel implements IXlsToEntityConversor<Oferta> {
 	
 

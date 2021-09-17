@@ -24,6 +24,10 @@ public interface IProductLoaderFacade {
 	public void loadArticulosFromFile();
 	public void loadOfertasFromFile();
 	
+	public void loadProductFromDB();
+	public void loadArticulosFromDB();
+	public void loadOfertasFromDB();
+	
 	
 	public Product getSelectedProduct();
 	public void setSelectedProduct(Product selectedProduct);

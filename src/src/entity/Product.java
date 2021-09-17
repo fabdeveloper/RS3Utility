@@ -1,6 +1,7 @@
 package src.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.enterprise.context.Dependent;
 import javax.persistence.Column;
@@ -46,8 +47,11 @@ public class Product implements Serializable, IPrototype<Product>{
 	@Column(name="URL_IMAGE")
 	private String urlImage;
 
-
+	@Column(name="CREATION_DATE")
+	private Date creationDate;
 	
+
+
 	/***************************************/
 	
 	public Integer getId() {
@@ -82,6 +86,14 @@ public class Product implements Serializable, IPrototype<Product>{
 	public void setUrlImage(String urlImage) {
 		this.urlImage = urlImage;
 	}
+	
+	public Date getCreationDate() {
+		return creationDate;
+	}
+
+	public void setCreationDate(Date creationDate) {
+		this.creationDate = creationDate;
+	}
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
@@ -110,7 +122,8 @@ public class Product implements Serializable, IPrototype<Product>{
 							"id= " + this.getId()  + "\n" +
 							"name= " + this.getName()  + "\n" +
 							"type= " + this.getType()  + "\n" +
-							"urlImage= " + this.getUrlImage()  + "\n";		
+							"urlImage= " + this.getUrlImage()  + "\n" +		
+							"creacion= " + this.getCreationDate()  + "\n";
 		
 		return sResult;
 	}

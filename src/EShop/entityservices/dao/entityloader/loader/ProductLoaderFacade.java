@@ -182,6 +182,21 @@ public class ProductLoaderFacade implements IProductLoaderFacade, Serializable  
 		getOfertaLoader().setSheetName(sheetName);		
 	}
 
+	@Override
+	public void loadProductFromDB() {
+		getProductLoader().loadFromDB();		
+	}
+
+	@Override
+	public void loadArticulosFromDB() {
+		getArticuloLoader().loadFromDB();		
+	}
+
+	@Override
+	public void loadOfertasFromDB() {
+		getOfertaLoader().loadFromDB();		
+	}
+
 
 
 }

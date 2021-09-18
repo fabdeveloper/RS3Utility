@@ -5,6 +5,7 @@ import javax.enterprise.context.RequestScoped;
 import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.ss.usermodel.Row;
 
+import EShop.entityservices.converter.xlstoentity.IXlsToEntityConversor;
 import src.entity.User;
 import src.inter.IServiceLocator;
 
@@ -29,6 +30,12 @@ public class UserDaoExcel implements IXlsToEntityConversor<User> {
 
 		
 		return nuevo;	
+	}
+
+	@Override
+	public Row entityToRow(User entity, Row row) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

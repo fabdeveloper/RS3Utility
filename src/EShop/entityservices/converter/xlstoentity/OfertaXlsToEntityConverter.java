@@ -4,6 +4,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.enterprise.context.RequestScoped;
+
+import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.ss.usermodel.Row;
 
@@ -19,8 +21,7 @@ public class OfertaXlsToEntityConverter extends AbstractXlsToEntityConverter<Ofe
 	@Override
 	public Oferta rowToEntity(Row row, IServiceLocator serviceLocator) {
 		DataFormatter formatter = new DataFormatter();
-		Oferta ofer = serviceLocator.getOfertaServices().getTransferObject();
-		
+		Oferta ofer = serviceLocator.getOfertaServices().getTransferObject();		
 		String errorMsg = new Date() + " - ->  OfertaXlsToEntityConverter.rowToEntity() - ERRORLIST: ";
 		Boolean bAlgunError = false;
 		/*
@@ -29,9 +30,7 @@ public class OfertaXlsToEntityConverter extends AbstractXlsToEntityConverter<Ofe
 		 * PRECIO - not null
 		 * STOCK - not null
 		 * ARTICULO - not null
-		 */
-		
-		
+		 */		
 		
 		// ID
 		String sid = formatter.formatCellValue(row.getCell(0));
@@ -44,7 +43,6 @@ public class OfertaXlsToEntityConverter extends AbstractXlsToEntityConverter<Ofe
 				bAlgunError = true;				
 			}
 		}
-
 		
 		// NAME
 		String name = formatter.formatCellValue(row.getCell(1));
@@ -77,8 +75,7 @@ public class OfertaXlsToEntityConverter extends AbstractXlsToEntityConverter<Ofe
 		
 		if(bAlgunError) {
 			throw new RS3Exception(errorMsg);
-		}
-		
+		}		
 		
 		// ARTICULO
 		String sArticulo_id = formatter.formatCellValue(row.getCell(5));
@@ -92,9 +89,7 @@ public class OfertaXlsToEntityConverter extends AbstractXlsToEntityConverter<Ofe
 			}catch(Throwable t) {
 			
 			}
-		}
-		
-		
+		}		
 		// ALL OTHER		
 		
 		ofer.setName(name);
@@ -108,8 +103,34 @@ public class OfertaXlsToEntityConverter extends AbstractXlsToEntityConverter<Ofe
 		}catch(Throwable t) {
 			
 		}
-
 		return ofer;
 	}
 
+	@Override
+	public Row entityToRow(Oferta entity, Row row) {
+		
+		/*
+		 * 0 - ID
+		 * 1 - NAME
+		 * 2 - DESCRIPCION
+		 * 3 - PRECIO
+		 * 4 - STOCK
+		 * 5 - ARTICULO_ID
+		 * 6 - URL_IMAGE
+		 * 7 - URL_IMAGE_BIG
+		 * 8 - EXPIRATION_DATE
+		 */
+		
+		row.createCell(0).setCellValue(entity.getId());
+		row.createCell(1).setCellValue(entity.getName());
+		row.createCell(2).setCellValue(entity.getDescripcion());
+		row.createCell(3).setCellValue(entity.getPrecio());
+		row.createCell(4).setCellValue(entity.getStock());
+		row.createCell(5).setCellValue(entity.getArticulo() != null ? entity.getArticulo().getId() : null);
+		row.createCell(6).setCellValue(entity.getUrlImage());
+		row.createCell(7).setCellValue(entity.getUrlImagebig());
+		row.createCell(8).setCellValue(entity.getExpirationDate());	
+		
+		return row;
+	}
 }

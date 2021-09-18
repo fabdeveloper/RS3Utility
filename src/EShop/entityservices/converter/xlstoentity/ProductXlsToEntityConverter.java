@@ -3,6 +3,8 @@ package EShop.entityservices.converter.xlstoentity;
 import java.util.Date;
 
 import javax.enterprise.context.RequestScoped;
+
+import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.ss.usermodel.Row;
 
@@ -69,6 +71,25 @@ public class ProductXlsToEntityConverter extends AbstractXlsToEntityConverter<Pr
 //		String msg = "ProductDaoExcel.rowToEntity() - loaded from excel with entityId= " + prod.getId() + ", name= " + prod.getName();
 //		publish(msg);					
 		return prod;
+	}
+
+	@Override
+	public Row entityToRow(Product entity, Row row) {
+		
+		Cell cell = row.createCell(0);
+		cell.setCellValue(entity.getId());
+		
+		cell = row.createCell(1);
+		cell.setCellValue(entity.getName());
+		
+		cell = row.createCell(2);
+		cell.setCellValue(entity.getType());
+		
+		cell = row.createCell(3);
+		cell.setCellValue(entity.getUrlImage());
+	
+		
+		return row;
 	}
 
 }

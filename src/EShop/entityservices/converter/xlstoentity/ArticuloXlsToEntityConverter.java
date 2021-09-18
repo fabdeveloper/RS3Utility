@@ -3,6 +3,8 @@ package EShop.entityservices.converter.xlstoentity;
 import java.util.Date;
 
 import javax.enterprise.context.RequestScoped;
+
+import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.ss.usermodel.Row;
 
@@ -86,5 +88,31 @@ public class ArticuloXlsToEntityConverter extends AbstractXlsToEntityConverter<A
 		
 		return art;
 	}
+
+//	@Override
+	public Row entityToRow(Articulo entity, Row row) {
+		
+		Cell cell = row.createCell(0);
+		cell.setCellValue(entity.getId());
+		
+		cell = row.createCell(1);
+		cell.setCellValue(entity.getName());
+		
+		cell = row.createCell(2);
+		cell.setCellValue(entity.getDescripcion());
+		
+		cell = row.createCell(3);
+		cell.setCellValue(entity.getPrice());
+		
+		cell = row.createCell(4);
+		cell.setCellValue(entity.getUrlImage());
+		
+		cell = row.createCell(5);
+		cell.setCellValue(entity.getProduct() != null ? entity.getProduct().getId() : null);		
+		
+		return row;
+	}
+
+
 
 }

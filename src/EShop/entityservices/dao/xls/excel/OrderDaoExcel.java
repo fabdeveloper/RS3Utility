@@ -5,6 +5,7 @@ import javax.enterprise.context.RequestScoped;
 import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.ss.usermodel.Row;
 
+import EShop.entityservices.converter.xlstoentity.IXlsToEntityConversor;
 import src.entity.Order;
 import src.inter.IServiceLocator;
 
@@ -31,6 +32,12 @@ public class OrderDaoExcel implements IXlsToEntityConversor<Order> {
 
 		
 		return nuevo;	
+	}
+
+	@Override
+	public Row entityToRow(Order entity, Row row) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

@@ -3,6 +3,7 @@ package EShop.entityservices.dao.xls.excel;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -18,6 +19,7 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 
+import EShop.entityservices.converter.xlstoentity.IXlsToEntityConversor;
 import src.entityservices.IEntityServices;
 import src.exception.DBException;
 import src.inter.IServiceLocator;
@@ -86,7 +88,28 @@ public abstract class AbstractDaoExcel<E> implements IDaoExcel<E> {
 				publish(msg);
 //				e.printStackTrace();
 			}
+	}
+	
+	@Override
+	public void createFile() {
+		Workbook workbook = new HSSFWorkbook();
+		Sheet sheet = workbook.createSheet(getSheetName());
 
+		int counter = 0;
+		for(E entity : getList()) {
+			entityToRow(entity, sheet.createRow(counter++));
+		}		
+		// write file
+        FileOutputStream fileOut = null;
+		try {
+			fileOut = new FileOutputStream(new File(getFileName() + ".xls"));			
+	        workbook.write(fileOut);
+	        fileOut.close();
+	        workbook.close();	        
+		
+		} catch (IOException e) {
+			e.printStackTrace();
+		}		
 	}
 	
 	
@@ -100,7 +123,7 @@ public abstract class AbstractDaoExcel<E> implements IDaoExcel<E> {
 		E newentity = null;
 		while(it.hasNext()) {			
 			try {
-				newentity = rowToEntity(it.next());
+				newentity = rowToEntity(it.next(), getServiceLocator());
 			} catch (Throwable e) {
 				String msg = "createList() - ERROR - row con problemas :   " + e.getMessage();
 				publish(msg);
@@ -203,6 +226,7 @@ public abstract class AbstractDaoExcel<E> implements IDaoExcel<E> {
 		this.serviceLocator = serviceLocator;
 	}
 
+	@Override
 	public IXlsToEntityConversor<E> getConversor() {
 		return conversor;
 	}
@@ -211,9 +235,15 @@ public abstract class AbstractDaoExcel<E> implements IDaoExcel<E> {
 		this.conversor = conversor;
 	}
 
+
 	@Override
-	public E rowToEntity(Row row) {
-		return getConversor().rowToEntity(row, getServiceLocator());
+	public E rowToEntity(Row row, IServiceLocator serviceLocator) {
+		return getConversor().rowToEntity(row, serviceLocator);
+	}
+
+	@Override
+	public Row entityToRow(E entity, Row row) {
+		return getConversor().entityToRow(entity, row);
 	}
 
 

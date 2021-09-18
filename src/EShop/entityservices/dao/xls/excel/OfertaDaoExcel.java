@@ -9,6 +9,7 @@ import javax.enterprise.inject.Alternative;
 import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.ss.usermodel.Row;
 
+import EShop.entityservices.converter.xlstoentity.IXlsToEntityConversor;
 import src.entity.Articulo;
 import src.entity.Oferta;
 import src.exception.RS3Exception;
@@ -49,5 +50,11 @@ public class OfertaDaoExcel implements IXlsToEntityConversor<Oferta> {
 			throw new RS3Exception(msg);			
 		}
 		return ofer;
+	}
+
+	@Override
+	public Row entityToRow(Oferta entity, Row row) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

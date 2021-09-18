@@ -9,6 +9,7 @@ import javax.enterprise.inject.Alternative;
 import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.ss.usermodel.Row;
 
+import EShop.entityservices.converter.xlstoentity.IXlsToEntityConversor;
 import src.entity.Articulo;
 import src.entity.Product;
 import src.exception.RS3Exception;
@@ -42,6 +43,12 @@ public class ArticuloDaoExel implements IXlsToEntityConversor<Articulo> {
 		
 		
 		return art;
+	}
+
+	@Override
+	public Row entityToRow(Articulo entity, Row row) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

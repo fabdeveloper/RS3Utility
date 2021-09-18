@@ -8,18 +8,21 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 
+import EShop.entityservices.converter.xlstoentity.IXlsToEntityConversor;
 import src.entityservices.IEntityServices;
 import src.inter.IServiceLocator;
 
-public interface IDaoExcel<E> {
-	
-	public abstract E rowToEntity(Row row);
-//	public abstract Row entityToRow(E entity);
+public interface IDaoExcel<E> extends IXlsToEntityConversor<E> {
+
+
 //	public abstract void init();
 	
 	public void setFileName(String fileName);
 	public String getFileName();
 	public void loadFile(); // xml file to Workbook object
+	public void createFile(); // write an entity list into an XLS file
+		
+	
 	public void createList(); // Workbook object to List<Entity>
 	public void persistList(); // TODO: eliminar esto - List<Entity> to BD
 	public void setList(List<E> list);
@@ -36,6 +39,8 @@ public interface IDaoExcel<E> {
 	public IServiceLocator getServiceLocator(); // EntityServices
 	public void setServiceLocator(IServiceLocator serviceLocator);
 	public EntityManager getEntityManager();
+	
+	public IXlsToEntityConversor<E> getConversor();
 	
 //	public IEntityServices<E> getEntityServices();
 //	public void setEntityServices(IEntityServices<E> entityServices);

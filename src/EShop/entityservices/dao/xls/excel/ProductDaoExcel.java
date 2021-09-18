@@ -5,6 +5,7 @@ import javax.enterprise.inject.Alternative;
 
 import org.apache.poi.ss.usermodel.Row;
 
+import EShop.entityservices.converter.xlstoentity.IXlsToEntityConversor;
 import src.entity.Product;
 import src.exception.RS3Exception;
 import src.inter.IServiceLocator;
@@ -30,6 +31,12 @@ public class ProductDaoExcel implements IXlsToEntityConversor<Product> {
 //		String msg = "ProductDaoExcel.rowToEntity() - loaded from excel with entityId= " + prod.getId() + ", name= " + prod.getName();
 //		publish(msg);					
 		return prod;
+	}
+
+	@Override
+	public Row entityToRow(Product entity, Row row) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

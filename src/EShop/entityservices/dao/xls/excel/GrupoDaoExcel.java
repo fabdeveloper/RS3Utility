@@ -5,6 +5,7 @@ import javax.enterprise.context.RequestScoped;
 import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.ss.usermodel.Row;
 
+import EShop.entityservices.converter.xlstoentity.IXlsToEntityConversor;
 import src.entity.Grupo;
 import src.inter.IServiceLocator;
 
@@ -23,6 +24,12 @@ public class GrupoDaoExcel implements IXlsToEntityConversor<Grupo> {
 		nuevo.setDescription(formatter.formatCellValue(row.getCell(2))); 
 		
 		return nuevo;
+	}
+
+	@Override
+	public Row entityToRow(Grupo entity, Row row) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

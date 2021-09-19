@@ -197,6 +197,24 @@ public class ProductLoaderFacade implements IProductLoaderFacade, Serializable  
 		getOfertaLoader().loadFromDB();		
 	}
 
+	@Override
+	public String createProductsXlsFile() {
+		getProductLoader().createFile();
+		return null;
+	}
+
+	@Override
+	public String createArticulosXlsFile() {
+		getArticuloLoader().createFile();
+		return null;
+	}
+
+	@Override
+	public String createOfertasXlsFile() {
+		getOfertaLoader().createFile();
+		return null;
+	}
+
 
 
 }

@@ -12,7 +12,7 @@ import EShop.entityservices.converter.xlstoentity.IXlsToEntityConversor;
 import src.entityservices.IEntityServices;
 import src.inter.IServiceLocator;
 
-public interface IDaoExcel<E> extends IXlsToEntityConversor<E> {
+public interface IDaoExcel<E> {
 
 
 //	public abstract void init();
@@ -41,6 +41,9 @@ public interface IDaoExcel<E> extends IXlsToEntityConversor<E> {
 	public EntityManager getEntityManager();
 	
 	public IXlsToEntityConversor<E> getConversor();
+	
+	public E rowToEntity(Row row, IServiceLocator serviceLocator);
+	public Row entityToRow(E entity, Row row);
 	
 //	public IEntityServices<E> getEntityServices();
 //	public void setEntityServices(IEntityServices<E> entityServices);

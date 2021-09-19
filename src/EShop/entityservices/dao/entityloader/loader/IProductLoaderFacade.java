@@ -43,6 +43,11 @@ public interface IProductLoaderFacade {
 	public void createArticulos();
 	public void createOfertas();
 	
+	public String createProductsXlsFile();
+	public String createArticulosXlsFile();
+	public String createOfertasXlsFile();
+	
+	
 	public IEntityLoader<Product, Product> getProductLoader();
 	public IEntityLoader<Articulo, Product> getArticuloLoader();
 	public IEntityLoader<Oferta, Articulo> getOfertaLoader();
